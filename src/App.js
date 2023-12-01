@@ -40,6 +40,14 @@ function App() {
     setSelectedRows([]);
     setSelectAllChecked(false);
     console.log(`Deleted member with ID: ${id}`);
+    const newTotalPages = Math.ceil(updatedMembers.length / itemsPerPage);
+  
+    // If the current page exceeds the new total pages, set the current page to the last page
+    if (currentPage > newTotalPages) {
+      setCurrentPage(newTotalPages);
+    }
+  
+    console.log('Deleted selected rows:', selectedRows);
   };
 
   const handlePageChange = (newPage) => {
@@ -80,8 +88,18 @@ function App() {
     setFilteredMembers(updatedMembers);
     setSelectedRows([]);
     setSelectAllChecked(false);
+  
+    // Calculate the new total pages after deletion
+    const newTotalPages = Math.ceil(updatedMembers.length / itemsPerPage);
+  
+    // If the current page exceeds the new total pages, set the current page to the last page
+    if (currentPage > newTotalPages) {
+      setCurrentPage(newTotalPages);
+    }
+  
     console.log('Deleted selected rows:', selectedRows);
   };
+  
 
   const handleEditChange = (id, field, value) => {
     setEditChanges((prevChanges) => ({ ...prevChanges, [id]: { ...prevChanges[id], [field]: value } }));
